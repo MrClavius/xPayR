@@ -2,9 +2,9 @@ Risk Evaluator - Documentation Overview
 ---
 ## 1.Risk Evaluator
 
-Risk Evaluator is a Quarkus-based application for transaction risk assessment. \
-The system leverages modern Java, containerization, Keycloak for authentication/authorization, PostgreSQL as the database, and Liquibase for schema migrations. \
-The API is RESTful and documented with OpenAPI. The project is modular, maintainable, and easily deployable with Docker Compose.
+- Risk Evaluator is a Quarkus-based application for transaction risk assessment. 
+- The system leverages modern Java, containerization, Keycloak for authentication/authorization, PostgreSQL as the database, and Liquibase for schema migrations. 
+- The API is RESTful and documented with OpenAPI. The project is modular, maintainable, and easily deployable with Docker Compose.
 ---
 ## Table of Contents
 - [Project Structure](#project-structure)
@@ -142,6 +142,6 @@ The API is RESTful and documented with OpenAPI. The project is modular, maintain
 ---
 ## **Summary**
 
-Risk Evaluator provides a complete, container-ready environment for transaction risk management.\
-Start it quickly with Docker Compose, explore the API via OpenAPI or Postman, and use Keycloak for secure, standards-based authentication.
+- Risk Evaluator provides a complete, container-ready environment for transaction risk management.
+- Start it quickly with Docker Compose, explore the API via OpenAPI or Postman, and use Keycloak for secure, standards-based authentication.
 ---

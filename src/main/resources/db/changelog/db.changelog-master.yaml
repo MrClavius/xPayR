@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: master
+      sqlFile:
+        path: changes/V1_create_risk_evaluation_log.sql
+        relativeToChangelogFile: true
+        encoding: utf8
+
+  - changeSet:
+      id: 2
+      author: master
+      sqlFile:
+        path: changes/V2_create_risk_matched_rules.sql
+        relativeToChangelogFile: true
+        encoding: utf8

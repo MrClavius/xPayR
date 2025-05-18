@@ -1,0 +1,21 @@
+FROM eclipse-temurin:21-jdk AS build
+WORKDIR /build
+
+COPY pom.xml mvnw ./
+COPY .mvn .mvn
+
+RUN chmod +x mvnw && ./mvnw dependency:go-offline
+
+COPY src/ ./src/
+
+RUN ./mvnw package -DskipTests
+
+FROM eclipse-temurin:21-jre
+WORKDIR /work/
+
+COPY --from=build /build/target/quarkus-app/ /work/
+
+COPY ./src/main/resources/riskevaluator-sandbox.p12 /etc/keystore/riskevaluator-sandbox.p12
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "quarkus-run.jar"]

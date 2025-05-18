@@ -1,0 +1,91 @@
+quarkus:
+  banner:
+    enabled: true
+    path: banner.txt
+
+  datasource:
+    db-kind: postgresql
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    jdbc:
+      url: ${DB_JDBC_URL}
+      driver: org.postgresql.Driver
+
+  hibernate-orm:
+    log:
+      sql: true
+    database:
+      generation: none
+
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.yaml
+    migrate-at-start: true
+
+  openapi-generator:
+    codegen:
+      input-base-dir: src/main/resources/openapi
+
+  cache:
+    enabled: true
+    caffeine:
+      default:
+        maximum-size: 1000
+        expire-after-write: 5m
+      bin-cache:
+        maximum-size: 500
+        expire-after-write: 10m
+
+  oidc:
+    auth-server-url: ${KEYCLOAK_AUTH_URL}
+    token:
+      issuer: ${KEYCLOAK_TOKEN_ISSUER}
+    client-id: ${KEYCLOAK_CLIENT_ID}
+    application-type: service
+
+  http:
+    auth:
+      permission:
+        authenticated:
+          paths: "/*"
+          policy: authenticated
+
+org:
+  openapi:
+    quarkus:
+      BIN_Table_Resource_OpenAPI3_yaml:
+        api:
+          BinLookupApi/mp-rest/url: https://sandbox.api.mastercard.com/bin-resources
+          BinLookupApi/mp-rest/providers: org.riskevaluator.infra.security.OAuth1RequestFilter
+
+mc:
+  consumer:
+    key: ${MC_CONSUMER_KEY}
+  private:
+    key:
+      path: ${MC_PRIVATE_KEY_PATH}
+      alias: ${MC_PRIVATE_KEY_ALIAS}
+      password: ${MC_PRIVATE_KEY_PASSWORD}
+
+"%test":
+  quarkus:
+    oidc:
+      enabled: false
+    http:
+      auth:
+        permission:
+          public:
+            paths: "/*"
+            policy: permit
+    datasource:
+      db-kind: h2
+      jdbc:
+        url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
+        driver: org.h2.Driver
+      username: sa
+      password: sa
+    hibernate-orm:
+      database:
+        generation: drop-and-create
+    liquibase:
+      enabled: false

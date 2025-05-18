@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "d3ac781b-5644-4573-b431-a8b828b9c679",
+		"name": "Risk evaluator api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37131020"
+	},
+	"item": [
+		{
+			"name": "Search bin range",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountRange\": 585240844\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/bin/account-range",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"bin",
+						"account-range"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST \"http://localhost:8080/bin/account-range\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"bin\": \"12345678\",\r\n           \"accountRange\": \"12345678901\"\r\n         }'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Analyze transaction risk",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"binNum\": 5854352,\r\n        \"amount\": 11112504.00,\r\n        \"location\": \"PL\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/transactions/risk",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"transactions",
+						"risk"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/transactions/risk \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\r\n        \"binNum\": 123456,\r\n        \"amount\": 250.00,\r\n        \"location\": \"PL\"\r\n      }'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Keycloak jwt token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.globals.set(\"bearer_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "risk-evaluator-backend",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/risk-evaluator/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"risk-evaluator",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

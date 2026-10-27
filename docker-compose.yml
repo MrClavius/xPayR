@@ -64,7 +64,7 @@ services:
       KEYCLOAK_TOKEN_ISSUER: http://localhost:8080/realms/risk-evaluator
       KEYCLOAK_CLIENT_ID: risk-evaluator-backend
 
-      MC_CONSUMER_KEY: 'faiLh-4ecww6lOk9w_yIkZKCzvayudI6yp7s8L6Z887b8bc8!d319b92ac064452dbbf589f309d619240000000000000000'
+      MC_CONSUMER_KEY: 'faiLh-4ecww6lOk9w_yIkZKCzvayudI6yp7s8L6Z887b8bc8!0bd4785545ae447083e18f8c9f67d95e0000000000000000'
       MC_PRIVATE_KEY_PATH: /riskevaluator-sandbox.p12
       MC_PRIVATE_KEY_ALIAS: riskevaluator
       MC_PRIVATE_KEY_PASSWORD: 'Eus$$NSjj94vvJpQmDJmc79ccAxmg@M1'
